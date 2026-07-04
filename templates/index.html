@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhishGuard AI | Voice Phishing Detection System</title>
+  <!-- Modern Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Floating Background Glows -->
+  <div class="glow-bg glow-1"></div>
+  <div class="glow-bg glow-2"></div>
+  <div class="glow-bg glow-3"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+            <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+            <line x1="12" y1="19" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <h1>PhishGuard AI</h1>
+      </div>
+      <div class="tagline">Voice Phishing & Synthetic Speech Detection System</div>
+      <div class="header-badge">Academic Version 1.0</div>
+    </header>
+
+    <!-- Main Workspace Grid -->
+    <main class="app-main-grid">
+      
+      <!-- Left Column: Interactive Input Controls -->
+      <section class="grid-col-left">
+        
+        <!-- Mascot & Status Card -->
+        <div class="glass-card mascot-card">
+          <div class="mascot-container">
+            <!-- Animated SVG Mascot "Vigi" -->
+            <svg id="vigi-mascot" viewBox="0 0 200 200" width="150" height="150">
+              <defs>
+                <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8B5CF6" />
+                  <stop offset="100%" stop-color="#3B82F6" />
+                </linearGradient>
+                <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#1E1B4B" />
+                  <stop offset="100%" stop-color="#0F0C2C" />
+                </linearGradient>
+                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+              </defs>
+              
+              <!-- Robot Ears/Antennas -->
+              <rect x="35" y="75" width="15" height="30" rx="7" fill="#4B5563" />
+              <rect x="150" y="75" width="15" height="30" rx="7" fill="#4B5563" />
+              <circle cx="42" cy="70" r="5" fill="#EC4899" class="antenna-light" />
+              <circle cx="158" cy="70" r="5" fill="#EC4899" class="antenna-light" />
+              
+              <!-- Robot Head Outer Body -->
+              <rect x="45" y="55" width="110" height="90" rx="25" fill="url(#bodyGrad)" stroke="#1F2937" stroke-width="3" />
+              
+              <!-- Robot Screen/Face -->
+              <rect id="robot-face-screen" x="55" y="65" width="90" height="70" rx="15" fill="url(#screenGrad)" stroke="#312E81" stroke-width="2" />
+              
+              <!-- Robot Eyes (Standard State) -->
+              <g id="robot-eyes">
+                <ellipse id="eye-left" cx="80" cy="95" rx="8" ry="8" fill="#10B981" filter="url(#glow)"/>
+                <ellipse id="eye-right" cx="120" cy="95" rx="8" ry="8" fill="#10B981" filter="url(#glow)"/>
+              </g>
+
+              <!-- Robot Mouth / Waveform Line -->
+              <path id="robot-mouth" d="M 80 118 Q 100 118 120 118" stroke="#10B981" stroke-width="3" stroke-linecap="round" fill="none" filter="url(#glow)" />
+              
+              <!-- Neck and Body Stand -->
+              <rect x="85" y="145" width="30" height="15" fill="#4B5563" />
+              <path d="M 60 160 L 140 160 L 150 185 L 50 185 Z" fill="#1F2937" />
+              <line x1="75" y1="172" x2="125" y2="172" stroke="#4B5563" stroke-width="2" />
+            </svg>
+          </div>
+          <div class="mascot-dialogue">
+            <span id="mascot-text">Hello! I am Vigi. Speak into your mic or upload an audio file, and I will analyze the speech parameters for phishing behavior.</span>
+          </div>
+        </div>
+
+        <!-- Testing Method Tabs -->
+        <div class="input-tabs-container">
+          <div class="tabs-header">
+            <button class="tab-btn active" data-tab="mic-tab">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+                <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+              Live Mic Tester
+            </button>
+            <button class="tab-btn" data-tab="upload-tab">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Audio File Upload
+            </button>
+          </div>
+
+          <div class="tab-contents">
+            <!-- Mic Tab -->
+            <div class="tab-pane active" id="mic-tab">
+              <p class="tab-description">Test real-time speech. Speak naturally, change your pitch, or try simulated phishing scripts to see how the system reacts.</p>
+              
+              <!-- Voice Visualizer Canvas -->
+              <div class="visualizer-container">
+                <canvas id="mic-visualizer"></canvas>
+                <div class="visualizer-overlay" id="visualizer-prompt">Microphone Inactive</div>
+              </div>
+
+              <!-- Controls -->
+              <div class="control-actions">
+                <button id="btn-start-mic" class="btn btn-primary">
+                  <span class="btn-icon">🎙️</span> Start Recording
+                </button>
+                <button id="btn-stop-mic" class="btn btn-danger" disabled>
+                  <span class="btn-icon">⏹️</span> Stop & Classify
+                </button>
+              </div>
+            </div>
+
+            <!-- Upload Tab -->
+            <div class="tab-pane" id="upload-tab">
+              <p class="tab-description">Upload audio clips (.wav or .mp3) from synthetic TTS models, phishing datasets, or genuine recordings to extract complete acoustic properties.</p>
+              
+              <div class="upload-dropzone" id="drop-zone">
+                <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon">
+                  <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+                  <path d="M12 12v9"/>
+                  <path d="m16 16-4-4-4 4"/>
+                </svg>
+                <div class="drop-text">Drag & drop your audio file here</div>
+                <div class="drop-subtext">Supports WAV, MP3, M4A, WEBM (Max 15MB)</div>
+                <button class="btn btn-secondary" onclick="document.getElementById('file-input').click()">Browse Files</button>
+                <input type="file" id="file-input" accept="audio/*" style="display: none;">
+              </div>
+
+              <div id="file-details-card" class="file-details-card hidden">
+                <div class="file-icon-wrapper">🎵</div>
+                <div class="file-metadata">
+                  <div id="file-name" class="file-name">filename.wav</div>
+                  <div id="file-size" class="file-size">1.2 MB</div>
+                </div>
+                <button id="btn-analyze-file" class="btn btn-primary">Run Deep Analysis</button>
+              </div>
+
+              <!-- Waveform display for uploaded file -->
+              <div class="visualizer-container hidden" id="upload-visualizer-container">
+                <canvas id="upload-waveform-canvas"></canvas>
+                <div class="visualizer-overlay" id="upload-visualizer-status">File Parsed. Ready.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Right Column: Real-Time Results & Predictions -->
+      <section class="grid-col-right">
+
+        <!-- Risk Dial Card -->
+        <div class="glass-card score-card">
+          <h2 class="card-title">Threat Assessment</h2>
+          
+          <div class="threat-display">
+            <!-- Circular Gauge -->
+            <div class="gauge-wrapper">
+              <svg viewBox="0 0 100 100" class="gauge">
+                <!-- Background track -->
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#2D1B54" stroke-width="8" stroke-dasharray="264" stroke-linecap="round" />
+                <!-- Foreground value path -->
+                <circle id="gauge-fill" cx="50" cy="50" r="42" fill="none" stroke="url(#gaugeGrad)" stroke-width="8" stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round" />
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#10B981" />   <!-- Safe Green -->
+                    <stop offset="60%" stop-color="#F59E0B" />  <!-- Warning Yellow -->
+                    <stop offset="100%" stop-color="#EF4444" /> <!-- Danger Red -->
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="gauge-center">
+                <div id="risk-score" class="risk-score-value">0%</div>
+                <div id="risk-label" class="risk-score-label">WAITING</div>
+              </div>
+            </div>
+
+            <!-- Verdict Indicator -->
+            <div class="verdict-banner waiting" id="verdict-banner">
+              <div class="verdict-title" id="verdict-title">System Idle</div>
+              <div class="verdict-desc" id="verdict-desc">Please capture/upload voice inputs.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extracted Features Display -->
+        <div class="glass-card features-card">
+          <h2 class="card-title">Acoustic Feature Extraction</h2>
+          <p class="section-subtitle">Real-time parameters extracted directly from the voice signal</p>
+          
+          <div class="feature-metrics-grid">
+            
+            <!-- Pitch Tracker -->
+            <div class="feature-bar-group">
+              <div class="feature-header">
+                <span class="feature-label">
+                  <span class="feature-icon">📈</span> Average Pitch (F0)
+                </span>
+                <span class="feature-value" id="val-pitch">-- Hz</span>
+              </div>
+              <div class="bar-container">
+                <div id="bar-pitch" class="bar-fill" style="width: 0%"></div>
+              </div>
+              <div class="bar-markers">
+                <span>0Hz</span>
+                <span>Male (85-180Hz)</span>
+                <span>Female (165-255Hz)</span>
+                <span>500Hz</span>
+              </div>
+            </div>
+
+            <!-- Pitch Variance (Expressiveness/Tone) -->
+            <div class="feature-bar-group">
+              <div class="feature-header">
+                <span class="feature-label">
+                  <span class="feature-icon">🎭</span> Pitch Stability / Jitter
+                </span>
+                <span class="feature-value" id="val-jitter">--%</span>
+              </div>
+              <div class="bar-container">
+                <div id="bar-jitter" class="bar-fill" style="width: 0%"></div>
+              </div>
+              <div class="bar-markers">
+                <span>Natural Modulation</span>
+                <span>Monotone / Synthetic</span>
+              </div>
+            </div>
+
+            <!-- Speech Rhythm & Pause Ratio -->
+            <div class="feature-bar-group">
+              <div class="feature-header">
+                <span class="feature-label">
+                  <span class="feature-icon">⏸️</span> Pause Ratio (Rhythm)
+                </span>
+                <span class="feature-value" id="val-pauses">--%</span>
+              </div>
+              <div class="bar-container">
+                <div id="bar-pauses" class="bar-fill" style="width: 0%"></div>
+              </div>
+              <div class="bar-markers">
+                <span>Continuous / Scripted</span>
+                <span>Standard Conversation</span>
+                <span>Hesitant</span>
+              </div>
+            </div>
+
+            <!-- Spectral Centroid (Timbre Brightness) -->
+            <div class="feature-bar-group">
+              <div class="feature-header">
+                <span class="feature-label">
+                  <span class="feature-icon">🎛️</span> Spectral Centroid
+                </span>
+                <span class="feature-value" id="val-centroid">-- Hz</span>
+              </div>
+              <div class="bar-container">
+                <div id="bar-centroid" class="bar-fill" style="width: 0%"></div>
+              </div>
+              <div class="bar-markers">
+                <span>Deep / Muffled</span>
+                <span>Standard Voice</span>
+                <span>Robotic / Metallic</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- History & Analytics Section -->
+    <section class="app-history-section">
+      <div class="glass-card history-card">
+        <div class="history-header">
+          <div class="history-title-area">
+            <span class="history-badge">SYSTEM LOGS</span>
+            <h2>Analysis History & Statistics</h2>
+          </div>
+          <button id="btn-clear-history" class="btn btn-secondary" style="flex: none; font-size: 12px; padding: 6px 12px;">
+            Clear History
+          </button>
+        </div>
+
+        <!-- Summary Statistics Panels -->
+        <div class="history-stats-grid">
+          <div class="stat-panel-card total">
+            <div class="stat-icon">📊</div>
+            <div class="stat-details">
+              <span class="stat-num" id="stat-total-count">0</span>
+              <span class="stat-label">Total Audios Tested</span>
+            </div>
+          </div>
+          <div class="stat-panel-card safe">
+            <div class="stat-icon">🛡️</div>
+            <div class="stat-details">
+              <span class="stat-num" id="stat-safe-count">0</span>
+              <span class="stat-label">Safe (Low Risk)</span>
+            </div>
+          </div>
+          <div class="stat-panel-card warning">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-details">
+              <span class="stat-num" id="stat-medium-count">0</span>
+              <span class="stat-label">Suspicious (Medium)</span>
+            </div>
+          </div>
+          <div class="stat-panel-card danger">
+            <div class="stat-icon">🚨</div>
+            <div class="stat-details">
+              <span class="stat-num" id="stat-high-count">0</span>
+              <span class="stat-label">Vishing (High Risk)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- History Records Table -->
+        <div class="history-table-wrapper">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Source Name</th>
+                <th>Verdict Details</th>
+                <th>Threat Score</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="history-rows">
+              <tr id="history-empty-row">
+                <td colspan="5" class="empty-state-cell">
+                  <div class="empty-state">
+                    <p style="margin: 0; color: var(--text-muted);">No voice analysis logs found. Perform recording or file analysis to generate history.</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multi-Model Benchmark Comparison Section -->
+    <section class="app-history-section" style="margin-top: 0;">
+      <div class="glass-card history-card">
+        <div class="history-header">
+          <div class="history-title-area">
+            <span class="history-badge">R&D EVALUATION</span>
+            <h2>Multi-Model Classifier Benchmarks</h2>
+          </div>
+          <div id="selected-best-badge" style="background: rgba(16, 185, 129, 0.15); color: #34D399; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;">Loading...</div>
+        </div>
+        <p class="section-subtitle" style="margin-bottom: 16px;">Comparative evaluation of 4 ML algorithms trained on 24 advanced acoustic features extracted from the Fake-or-Real (FoR) dataset (600 samples).</p>
+
+        <div class="history-table-wrapper">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Classifier Algorithm</th>
+                <th>Accuracy</th>
+                <th>Precision</th>
+                <th>Recall</th>
+                <th>F1-Score</th>
+                <th>Latency</th>
+              </tr>
+            </thead>
+            <tbody id="benchmark-rows">
+              <tr>
+                <td colspan="6" class="empty-state-cell">
+                  <p style="margin: 0; color: var(--text-muted);">Loading benchmark data...</p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Dual-Stage Architecture Diagram -->
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+          <span class="history-badge" style="margin-bottom: 8px; display: inline-block;">DETECTION ARCHITECTURE</span>
+          <h3 style="font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 16px;">Dual-Stage Hybrid Classification Pipeline</h3>
+          <div style="display: flex; align-items: stretch; gap: 12px; flex-wrap: wrap;">
+            <!-- Stage 1 -->
+            <div style="flex: 1; min-width: 280px; background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.2); border-radius: 12px; padding: 16px;">
+              <div style="font-size: 11px; font-weight: 800; color: #C084FC; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Stage 1 — Acoustic Authenticity</div>
+              <div style="font-size: 13px; font-weight: 600; color: white; margin-bottom: 6px;">ML Classifier (SVM / RF / MLP)</div>
+              <p style="font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; margin: 0;">Analyzes 24-dimensional feature vector (MFCCs, Chroma STFT, Spectral Rolloff, Bandwidth, Pitch, Jitter, ZCR, RMS) to classify the voice as <strong style="color:#34D399;">Human</strong> or <strong style="color:#EF4444;">Synthetic AI</strong>.</p>
+            </div>
+            <!-- Arrow -->
+            <div style="display: flex; align-items: center; font-size: 24px; color: var(--color-primary);">→</div>
+            <!-- Stage 2 -->
+            <div style="flex: 1; min-width: 280px; background: rgba(236,72,153,0.06); border: 1px solid rgba(236,72,153,0.2); border-radius: 12px; padding: 16px;">
+              <div style="font-size: 11px; font-weight: 800; color: #F472B6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">Stage 2 — Behavioral Intent Analysis</div>
+              <div style="font-size: 13px; font-weight: 600; color: white; margin-bottom: 6px;">Heuristic Stress Estimator</div>
+              <p style="font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; margin: 0;">If human, evaluates Jitter variance, Pause Ratio, and Spectral Centroid to flag <strong style="color:#FBBF24;">Social Engineering pressure</strong> vs. <strong style="color:#34D399;">Genuine safe caller</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
